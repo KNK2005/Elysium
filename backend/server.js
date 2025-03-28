@@ -7,15 +7,19 @@ import { errorHandler } from './middlewares/errorMiddleware.js';
 import postRoutes from './routes/postRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
-
-
-
+import cors from 'cors';
 
 dotenv.config();
 connectDB();
 
 const app = express();
 app.use(express.json());
+
+// Enable CORS
+app.use(cors({
+  origin: 'http://localhost:5173', // Adjust if needed
+  credentials: true,
+}));
 
 // Basic Route
 app.get('/', (req, res) => {
@@ -34,3 +38,4 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

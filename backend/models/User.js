@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const userSchema = mongoose.Schema({
-    name: { type: String, unique:true,prequired: true },
+    name: { type: String, unique:true,required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ['patient', 'peer supporter'], required: true },
+    role: { type: String, enum: ['Patient', 'Peer supporter'], required: true },
     sex: { type: String, required: true },
     addiction: { type: String, default: null },
     disease: { type: String, default: null },

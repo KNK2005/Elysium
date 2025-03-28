@@ -1,0 +1,132 @@
+/* src/components/NavBar/NavBar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Pushes logo left, links right */
+    align-items: center;
+    width: 100%; /* --- FIX: Ensures navbar tries to use full viewport width --- */
+    padding: 0.8rem 2rem; /* Vertical and horizontal padding */
+    background-color: #1e293b; /* Dark slate blue */
+    color: #e2e8f0; /* Light slate gray text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    position: sticky; /* Keep it at the top when scrolling */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays above other content */
+    box-sizing: border-box; /* --- FIX: Include padding/border in the 100% width --- */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .navbar-logo {
+    font-size: 1.7rem;
+    font-weight: 600; /* Semi-bold */
+    color: #38bdf8; /* Bright sky blue */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-logo:hover {
+    color: #7dd3fc; /* Lighter sky blue */
+  }
+  
+  .navbar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Space between nav items */
+  }
+  
+  .navbar-links li {
+    display: inline-block;
+  }
+  
+  /* Style for regular text links */
+  .navbar-links a:not(.navbar-btn) {
+    color: #e2e8f0; /* Light slate gray text */
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.4rem 0.2rem; /* Add a bit of clickable area */
+    position: relative; /* For potential future underlines or effects */
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:not(.navbar-btn):hover {
+    color: #ffffff; /* White on hover */
+  }
+  
+  /* Shared button styling (applied to <a> links or <button>) */
+  .navbar-btn {
+    background-color: #38bdf8; /* Bright sky blue */
+    color: #0f172a; /* Dark slate text on button */
+    border: none;
+    padding: 0.5rem 1.2rem; /* Button padding */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500; /* Medium weight */
+    text-decoration: none; /* Remove underline if it's a link */
+    display: inline-block; /* Allow padding */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .navbar-btn:hover {
+    background-color: #0ea5e9; /* Slightly darker sky blue */
+    transform: translateY(-1px); /* Slight lift effect */
+  }
+  
+  .navbar-btn:active {
+    transform: translateY(0px); /* Press down effect */
+  }
+  
+  /* Specific Logout Button Style */
+  .navbar-btn.logout {
+    background-color: #f43f5e; /* Rose red */
+    color: #ffffff; /* White text */
+  }
+  
+  .navbar-btn.logout:hover {
+    background-color: #e11d48; /* Darker rose red */
+  }
+  
+  /* --- Responsive Design --- */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column; /* Stack logo and links */
+      align-items: flex-start; /* Align items to the left */
+      padding: 1rem 1.5rem; /* Adjust padding for mobile */
+    }
+  
+    .navbar-logo {
+      margin-bottom: 0.8rem; /* Space below logo */
+    }
+  
+    .navbar-links {
+      width: 100%; /* Make links take full width */
+      flex-direction: column; /* Stack links vertically */
+      align-items: flex-start; /* Align links to the left */
+      gap: 0.8rem; /* Reduce gap for vertical layout */
+    }
+  
+    .navbar-links li {
+      width: 100%; /* Make list items take full width */
+    }
+  
+    /* Make buttons/links full width on mobile for easier tapping */
+    .navbar-links .navbar-btn,
+    .navbar-links a:not(.navbar-btn) {
+      display: block; /* Make them block level */
+      width: 100%;
+      text-align: left; /* Align text left */
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      box-sizing: border-box; /* Include padding in width */
+    }
+  
+    .navbar-links .navbar-btn {
+      text-align: center; /* Center text specifically for buttons */
+      padding: 0.6rem 1rem; /* Adjust button padding */
+    }
+  }

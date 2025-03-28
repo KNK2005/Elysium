@@ -16,3 +16,4 @@ router.route('/:id').put(protect, updatePost).delete(protect, deletePost);
 router.get('/', getPosts);
 
 export default router;
+

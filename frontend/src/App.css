@@ -1,42 +1,144 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* src/App.css or src/index.css */
+
+/* --- Basic Reset & Body Styles --- */
+body {
+  margin: 0; /* --- FIX: Remove default body margin --- */
+  padding: 0; /* --- FIX: Remove default body padding --- */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f1f5f9; /* Very light cool gray background */
+  color: #1e293b; /* Dark slate text color */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* --- FIX: Ensure body ITSELF isn't width-limited --- */
+  /* Avoid setting width or max-width directly on the body */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Apply box-sizing to all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* --- Main Content Container --- */
+/* Apply this class to the <main> tag wrapping your <Routes> in App.js */
+.main-content {
+  max-width: 1200px; /* Limit content width for readability */
+  margin: 2rem auto; /* Vertical margin and auto horizontal margins for centering */
+  padding: 1.5rem 2rem; /* Padding inside the content area */
+  background-color: #ffffff; /* White background for content */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(72, 66, 66, 0.1);
+}
+
+/* Responsive padding for main content */
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0; /* Optional: Remove radius on mobile for edge-to-edge feel */
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+/* --- Optional: Basic Styling for Forms & Posts --- */
+/* Add more specific styles in component CSS files if needed */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Adjust spacing between form elements */
+  width: 100%; /* --- Make the form itself take full width of its container --- */
+  /* Remove any fixed width or max-width you might have added directly to the form */
+  padding: 0; /* Remove padding from form if .main-content provides it */
+  border: none; /* Remove border from form if .main-content provides separation */
+  border-radius: 0; /* Remove radius from form */
+  box-sizing: border-box; /* Just in case */
 }
 
-.card {
-  padding: 2em;
+form label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  display: block; /* Ensure label is above input */
 }
 
-.read-the-docs {
-  color: #888;
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #cbd5e1; /* Slightly darker border */
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+form button[type="submit"] {
+  background-color: #1e293b; /* Match navbar dark color */
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* Align button to the start */
+}
+
+form button[type="submit"]:hover {
+  background-color: #334155; /* Slightly lighter dark slate */
+}
+
+.error {
+  color: #dc2626; /* Red */
+  background-color: #fee2e2; /* Light red background */
+  padding: 0.8rem;
+  border: 1px solid #f87171;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.success {
+   color: #15803d; /* Green */
+   background-color: #dcfce7; /* Light green background */
+   padding: 0.8rem;
+   border: 1px solid #86efac;
+   border-radius: 4px;
+   margin-bottom: 1rem;
+}
+
+.post {
+  border: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  background-color: #f8fafc; /* Slightly off-white */
+}
+
+.post h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #0f172a; /* Very dark slate */
+}
+
+.post p {
+  margin-bottom: 0.5rem;
+}
+
+.post span {
+  font-size: 0.9rem;
+  color: #64748b; /* Medium slate gray */
+  background-color: #e2e8f0; /* Tag background */
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }

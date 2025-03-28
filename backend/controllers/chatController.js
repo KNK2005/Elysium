@@ -5,6 +5,7 @@ import User from '../models/User.js';
 // @desc Send a message
 // @route POST /api/chats
 // @access Private
+
 const sendMessage = asyncHandler(async (req, res) => {
   const { receiverId, content } = req.body;
 

@@ -28,7 +28,16 @@ const getUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 });
+const getUserProfileById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password'); // Exclude password
 
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
 // @desc    Update user profile
 // @route   PUT /api/users/profile
 // @access  Private
@@ -82,4 +91,4 @@ const searchUsers = asyncHandler(async (req, res) => {
     const users = await User.find(query).select('name role sex addiction disease occupation background');
     res.json(users);
   });
-export { getUserProfile, updateUserProfile , searchUsers };
+export { getUserProfile, updateUserProfile , searchUsers , getUserProfileById};

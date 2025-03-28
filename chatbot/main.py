@@ -5,7 +5,7 @@ import os
 from pymongo import MongoClient
 
 # MongoDB Configuration
-MONGO_URI = "mongodb+srv://sanidhyakumdev:2wPOZg1aNmk7JfV0@elysium.97nbum7.mongodb.net/?retryWrites=true&w=majority&appName=Elysium"
+MONGO_URI = ""
 DATABASE_NAME = "test"  # Replace with your database name
 USERS_COLLECTION_NAME = "users"  # Replace with your users collection name
 
@@ -40,7 +40,7 @@ def find_user_by_name(db, user_name):
         return None
 
 #  API Key Setup
-GOOGLE_API_KEY = "AIzaSyDa3YvTacxDxSxzwUgV9jYAOALBjnfPYN0"
+GOOGLE_API_KEY = ""
 if not GOOGLE_API_KEY:
     print("Error: GOOGLE_API_KEY environment variable not set.  Please set it.")
     exit()

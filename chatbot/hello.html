@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elysium Chatbot</title>
+    <style>
+        /* General container styling */
+        #chat-container {
+            width: 500px; /* Adjust as needed */
+            margin: 20px auto; /* Center the container */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Light background */
+            color: #495057; /* Darker text */
+        }
+
+        /* Header styling */
+        #header {
+            background-color: #5bc0de; /* Light blue header */
+            color: #fff;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            font-size: 28px; /* Larger font size */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Chat history styling */
+        #chat-history {
+            padding: 15px;
+            height: 450px; /* Increased height */
+            overflow-y: scroll;
+            background-color: #fff; /* White background */
+        }
+
+        /* Message styling */
+        .message {
+            padding: 12px 16px; /* Further increased padding */
+            margin-bottom: 10px;
+            border-radius: 25px; /* More rounded message bubbles */
+            clear: both;
+            word-wrap: break-word;
+            font-size: 17px; /* Slightly larger font */
+        }
+
+        .user-message {
+            background-color: #d1ecf1; /* Very light blue for user */
+            text-align: left;
+            float: left;
+            color: #495057; /* Darker text */
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.08); /* Stronger shadow */
+        }
+
+        .bot-message {
+            background-color: #d4edda; /* Very light green for bot */
+            text-align: left;
+            float: left;
+            color: #495057; /* Darker text */
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.08); /* Stronger shadow */
+        }
+
+        /* Input area styling */
+        #input-area {
+            display: flex;
+            padding: 15px;
+            background-color: #e9ecef; /* Very light gray */
+            flex-direction: column;
+        }
+
+        #userMessage {
+            flex-grow: 1;
+            padding: 14px; /* Further increased padding */
+            border: 1px solid #ced4da;
+            border-radius: 10px; /* More rounded corners */
+            margin-bottom: 10px;
+            font-size: 19px; /* Further increased font */
+        }
+
+        #sendButton {
+            padding: 14px 18px; /* Further increased padding */
+            border: none;
+            background-color: #5bc0de; /* Light blue button */
+            color: #fff;
+            border-radius: 10px; /* More rounded corners */
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 19px; /* Further increased font */
+            font-weight: bold;
+        }
+
+        #sendButton:hover {
+            background-color: #46b8da; /* Slightly darker hover color */
+        }
+
+        /* Loading indicator styling */
+        #loading-indicator {
+            display: none;
+            font-style: italic;
+            color: #777;
+            font-size: 15px; /* Slightly larger */
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="header">Elysium</div>
+        <div id="chat-history"></div>
+        <div id="input-area">
+            <input type="text" id="userMessage" placeholder="Type your message..." autofocus>
+            <button id="sendButton">Send</button>
+            <div id="loading-indicator" style="display: none;">Typing...</div>
+        </div>
+    </div>
+
+    <script>
+        const chatHistory = document.getElementById('chat-history');
+        const userMessageInput = document.getElementById('userMessage');
+        const sendButton = document.getElementById('sendButton');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        // Function to get URL parameters
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Get the name from the URL
+        const userName = getParameterByName('name');
+
+        // Function to display a message
+        function displayMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = `${message}`;
+            chatHistory.appendChild(messageElement);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        //Initial chat message:
+        if (userName){
+                displayMessage('bot', `Hello ${userName}. Welcome to Elysium`);
+        }
+        else{
+                displayMessage('bot', `Hello user, welcome to Elysium`);
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+
+        userMessageInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userMessage = userMessageInput.value;
+
+            if (userMessage.trim() === '') return;
+
+            displayMessage('user', userMessage);
+            userMessageInput.value = '';
+            loadingIndicator.style.display = 'block'; // Show the indicator
+
+            fetch('http://localhost:5003/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: userName, // Send the name in the request body
+                    message: userMessage
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botResponse = data.response;
+                displayMessage('bot', botResponse);
+                loadingIndicator.style.display = 'none'; // Hide the indicator
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                displayMessage('bot', 'An error occurred. Please try again.');
+                loadingIndicator.style.display = 'none'; // Hide the indicator
+            });
+        }
+    </script>
+</body>
+</html>

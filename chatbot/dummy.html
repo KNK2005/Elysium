@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome!</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>Enter your name:</p>
+    <input type="text" id="userNameInput" placeholder="Your Name">
+    <button onclick="goToChatbot()">Go to Chatbot</button>
+
+    <script>
+        function goToChatbot() {
+            const userName = document.getElementById("userNameInput").value;
+            const chatbotURL = "hello.html?name=" + encodeURIComponent(userName);
+            window.location.href = chatbotURL;
+        }
+    </script>
+</body>
+</html>

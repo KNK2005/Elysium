@@ -1,0 +1,65 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.sqlite
+*.sqlite3
+dump.rdb
+*.local
+*.pid
+*.seed
+*.lock
+
+# Build
+dist/
+build/
+.vite
+
+# Cache
+.cache/
+.npm/
+.yarn/
+.pnpm-debug.log
+.vscode/
+
+# Backend
+/backend/node_modules/
+
+# Frontend
+/frontend/node_modules/
+frontend/dist/
+
+# Editor Specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Coverage and Reports
+coverage/
+*.lcov
+
+# Others
+*.bak
+*.temp
